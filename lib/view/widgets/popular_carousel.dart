@@ -1,3 +1,4 @@
+import 'package:GrubNet/core/getx/arguments_controller.dart';
 import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,18 +9,24 @@ import 'package:intl/intl.dart';
 
 class PopularCarousel extends StatelessWidget {
   final movie = Get.put(MovieController());
+  final args = Get.put(ArgumentsController());
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       itemCount:
           movie.popularViewModel.map((movies) => movies.posterImg).length,
-      itemBuilder: (context, index) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildImage(index),
-          buildTitle(index),
-          buildRating(index),
-        ],
+      itemBuilder: (context, index) => InkWell(
+        borderRadius: BorderRadius.circular(5),
+        splashColor: Colors.grey[700],
+        onTap: () => args.popularArgs(index),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildImage(index),
+            buildTitle(index),
+            buildRating(index),
+          ],
+        ),
       ),
       options: CarouselOptions(
         viewportFraction: 0.3,

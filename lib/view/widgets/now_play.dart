@@ -16,19 +16,10 @@ class NowPlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       carouselController: CarouselController(),
-      itemCount: movie.nowPlayViewModel.map((e) => e.posterImg).length >= 5
-          ? 5
-          : movie.nowPlayViewModel.map((e) => e.posterImg).length,
+      itemCount: 5,
       itemBuilder: (context, index) => InkWell(
         splashColor: disabledIconColor,
-        onTap: () => args.getArguments(
-          id: movie.nowPlayViewModel[index].id,
-          backdropImg: movie.nowPlayViewModel[index].backdropImg,
-          posterImg: movie.nowPlayViewModel[index].posterImg,
-          genres: movie.nowPlayViewModel[index].genres,
-          overview: movie.nowPlayViewModel[index].overview,
-          title: movie.nowPlayViewModel[index].title,
-        ),
+        onTap: () => args.nowPlayArgs(index),
         child: CachedNetworkImage(
           errorWidget: (context, url, error) => FlutterLogo(),
           placeholder: (context, url) => Container(

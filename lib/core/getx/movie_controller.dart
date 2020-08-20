@@ -8,6 +8,8 @@ class MovieController extends GetxController {
   final _service = Get.put(MovieAPIProvider());
 
   var pageIndex = 0.obs;
+  var movieId = 550.obs;
+  // var movieKey = '2ZAdcWHuCmY'.obs;
 
   List<GenreViewModel> genreViewModel = List<GenreViewModel>();
   List<DetailViewModel> detailViewModel = List<DetailViewModel>();
@@ -16,6 +18,15 @@ class MovieController extends GetxController {
   List<DetailViewModel> recommendViewModel = List<DetailViewModel>();
   List<DetailViewModel> topRatedViewModel = List<DetailViewModel>();
   List<DetailViewModel> nowPlayViewModel = List<DetailViewModel>();
+
+  List<DetailViewModel> similiarViewModel = List<DetailViewModel>();
+
+  Future<void> getSimiliarData() async {
+    List<Detail> videos = await _service.getSimiliarMovie(movieId.value);
+    similiarViewModel =
+        videos.map((data) => DetailViewModel(detail: data)).toList();
+    update();
+  }
 
   Future<void> getTopRatedData() async {
     List<Detail> topRated = await _service.getTopRatedMovie();
@@ -65,6 +76,7 @@ class MovieController extends GetxController {
 
   @override
   void onInit() {
+    getSimiliarData();
     getGenreData();
     getSearchData();
     getPopularData();

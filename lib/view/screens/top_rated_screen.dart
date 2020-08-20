@@ -1,4 +1,5 @@
 import 'package:GrubNet/constant.dart';
+import 'package:GrubNet/core/getx/arguments_controller.dart';
 import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,22 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class TopRatedScreen extends StatelessWidget {
+  final args = Get.put(ArgumentsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<MovieController>(
         init: MovieController(),
         builder: (movie) => ListView.builder(
-          itemBuilder: (context, index) => Stack(
-            children: [
-              buildPosterBackground(movie, index),
-              buildPosterImage(movie, index),
-            ],
+          itemBuilder: (context, index) => InkWell(
+            splashColor: Colors.grey[700],
+            onTap: () => args.topRatedArgs(index),
+            child: Stack(
+              children: [
+                buildPosterBackground(movie, index),
+                buildPosterImage(movie, index),
+              ],
+            ),
           ),
           itemCount: movie.genreViewModel.length,
         ),

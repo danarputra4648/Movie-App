@@ -11,10 +11,7 @@ class DotIndicator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 25),
       child: AnimatedSmoothIndicator(
         activeIndex: movieIndicator.pageIndex.value,
-        count: movieIndicator.nowPlayViewModel.map((e) => e.posterImg).length >=
-                5
-            ? 5
-            : movieIndicator.nowPlayViewModel.map((e) => e.posterImg).length,
+        count: 5,
         effect: ExpandingDotsEffect(
           dotWidth: 25,
           dotHeight: 5,
