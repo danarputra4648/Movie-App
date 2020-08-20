@@ -1,5 +1,5 @@
 import 'package:GrubNet/constant.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
+import 'package:GrubNet/core/getx/movie_injection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movie = Get.put(MovieController());
+    final movie = Get.put(MovieInjection());
     final routeArgs = Get.arguments as Map<String, Object>;
     final backdropImg = routeArgs['backdrop_img'];
     final posterImg = routeArgs['poster_img'];
@@ -37,9 +37,9 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  GetBuilder<MovieController> buildSimiliarPoster() {
-    return GetBuilder<MovieController>(
-      init: MovieController(),
+  GetBuilder<MovieInjection> buildSimiliarPoster() {
+    return GetBuilder<MovieInjection>(
+      init: MovieInjection(),
       builder: (similiar) => SliverToBoxAdapter(
         child: similiar.similiarViewModel.isNotEmpty
             ? Column(
@@ -104,7 +104,7 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter buildPosterGenres(MovieController genre, List genres) {
+  SliverToBoxAdapter buildPosterGenres(MovieInjection genre, List genres) {
     return SliverToBoxAdapter(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,4 @@
-import 'package:GrubNet/core/getx/nav_bar_controller.dart';
+import 'package:GrubNet/core/getx/nav_bar_injection.dart';
 import 'package:flutter/material.dart';
 
 import 'package:GrubNet/view/widgets/nav_bar.dart';
@@ -16,8 +16,8 @@ class HomeScreens extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GetBuilder<NavBarController>(
-              init: NavBarController(),
+            GetBuilder<NavBarInjection>(
+              init: NavBarInjection(),
               builder: (appbarName) => Text(
                 appbarName.listTitleWidget
                     .elementAt(appbarName.selectedIndex.value),
@@ -45,8 +45,8 @@ class HomeScreens extends StatelessWidget {
           ],
         ),
       ),
-      body: GetBuilder<NavBarController>(
-        init: NavBarController(),
+      body: GetBuilder<NavBarInjection>(
+        init: NavBarInjection(),
         builder: (navigator) =>
             navigator.listWidget.elementAt(navigator.selectedIndex.value),
       ),

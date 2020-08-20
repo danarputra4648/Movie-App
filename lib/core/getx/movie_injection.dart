@@ -1,30 +1,27 @@
 import 'package:GrubNet/core/model/movie.dart';
 import 'package:GrubNet/core/repositories/movie_api_helper.dart';
 import 'package:GrubNet/core/view_model/movie_view_model.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:get/get.dart';
 
-class MovieController extends GetxController {
+class MovieInjection extends GetxController {
   final _service = Get.put(MovieAPIProvider());
 
-  var pageIndex = 0.obs;
   var movieId = 550.obs;
   // var movieKey = '2ZAdcWHuCmY'.obs;
-
   List<GenreViewModel> genreViewModel = List<GenreViewModel>();
+
   List<DetailViewModel> detailViewModel = List<DetailViewModel>();
   List<DetailViewModel> upcomingViewModel = List<DetailViewModel>();
   List<DetailViewModel> popularViewModel = List<DetailViewModel>();
   List<DetailViewModel> recommendViewModel = List<DetailViewModel>();
   List<DetailViewModel> topRatedViewModel = List<DetailViewModel>();
   List<DetailViewModel> nowPlayViewModel = List<DetailViewModel>();
-
   List<DetailViewModel> similiarViewModel = List<DetailViewModel>();
 
   Future<void> getSimiliarData() async {
-    List<Detail> videos = await _service.getSimiliarMovie(movieId.value);
+    List<Detail> similiar = await _service.getSimiliarMovie(movieId.value);
     similiarViewModel =
-        videos.map((data) => DetailViewModel(detail: data)).toList();
+        similiar.map((data) => DetailViewModel(detail: data)).toList();
     update();
   }
 
@@ -66,11 +63,6 @@ class MovieController extends GetxController {
     List<Detail> nowPlay = await _service.getNowPlayMovie();
     nowPlayViewModel =
         nowPlay.map((data) => DetailViewModel(detail: data)).toList();
-    update();
-  }
-
-  void onPageChanged(int index, CarouselPageChangedReason reason) {
-    pageIndex.value = index;
     update();
   }
 

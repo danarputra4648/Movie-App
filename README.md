@@ -15,5 +15,9 @@ Link    : [His Dribble](https://dribbble.com/shots/4828362-Movie-app) <br>
 <img src=".Screenshot/ranking.png" alt="rank screen" width="240" height=480/>
 <img src=".Screenshot/top_rated.png" alt="top_rated screen" width="240" height=480/>
 <img src=".Screenshot/profile.png" alt="profile screen" width="240" height=480/>
+<<<<<<< HEAD
 <img src=".Screenshot/detail.png" alt="detail screen" width="240" height=480/>
 />
+=======
+<img src=".Screenshot/detail.png" alt="detail screen" width="240" height=480/>
+>>>>>>> 286820f... Add new screenshot and update Readme

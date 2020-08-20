@@ -1,9 +1,9 @@
-import 'package:GrubNet/core/getx/movie_controller.dart';
+import 'package:GrubNet/core/getx/movie_injection.dart';
 import 'package:GrubNet/view/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ArgumentsController {
+class ArgumentsInjection {
   void getArguments({
     @required int id,
     @required String title,
@@ -29,7 +29,7 @@ class ArgumentsController {
     );
   }
 
-  final movie = Get.put(MovieController());
+  final movie = Get.put(MovieInjection());
 
   void nowPlayArgs(int index) {
     movie.movieId.value = movie.nowPlayViewModel[index].id;

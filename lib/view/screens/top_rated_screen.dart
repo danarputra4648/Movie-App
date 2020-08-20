@@ -1,18 +1,18 @@
 import 'package:GrubNet/constant.dart';
-import 'package:GrubNet/core/getx/arguments_controller.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
+import 'package:GrubNet/core/getx/args_injection.dart';
+import 'package:GrubNet/core/getx/movie_injection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class TopRatedScreen extends StatelessWidget {
-  final args = Get.put(ArgumentsController());
+  final args = Get.put(ArgumentsInjection());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<MovieController>(
-        init: MovieController(),
+      body: GetBuilder<MovieInjection>(
+        init: MovieInjection(),
         builder: (movie) => ListView.builder(
           itemBuilder: (context, index) => InkWell(
             splashColor: Colors.grey[700],
@@ -30,7 +30,7 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Container buildPosterBackground(MovieController movie, int index) {
+  Container buildPosterBackground(MovieInjection movie, int index) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(10),
@@ -47,7 +47,7 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Expanded buildMovieInfo(MovieController movie, int index) {
+  Expanded buildMovieInfo(MovieInjection movie, int index) {
     return Expanded(
       flex: 4,
       child: Column(
@@ -89,7 +89,7 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Positioned buildPosterImage(MovieController movie, int index) {
+  Positioned buildPosterImage(MovieInjection movie, int index) {
     return Positioned(
       top: 0,
       left: 40,

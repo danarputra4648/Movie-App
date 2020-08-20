@@ -4,7 +4,7 @@ import 'package:GrubNet/view/screens/top_rated_screen.dart';
 import 'package:GrubNet/view/widgets/home.dart';
 import 'package:get/get.dart';
 
-class NavBarController extends GetxController {
+class NavBarInjection extends GetxController {
   var listTitleWidget = [
     'Movie',
     'Ranking',
