@@ -36,8 +36,7 @@ class MovieAPIProvider extends Services {
   Future<List<Genre>> getGenreMovie() async {
     List result;
     try {
-      final response = await get(
-          'https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US',
+      final response = await get(genreMovieUrl,
           headers: {'content-type': 'application/json;charset=utf-8'});
       if (response.statusCode == 200) {
         result = (jsonDecode(response.body))['genres'];
@@ -47,16 +46,15 @@ class MovieAPIProvider extends Services {
       throw HttpException(response.body);
     } on HttpException catch (e) {
       print(e.message);
+      throw e.message;
     }
-    return [];
   }
 
   @override
   Future<List<Detail>> getPopularMovie() async {
     List result;
     try {
-      final response = await get(
-          'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1',
+      final response = await get(popularMovieUrl,
           headers: {'content-type': 'application/json;charset=utf-8'});
       if (response.statusCode == 200) {
         result = (jsonDecode(response.body))['results'];
@@ -73,8 +71,7 @@ class MovieAPIProvider extends Services {
   Future<List<Detail>> getNowPlayMovie() async {
     List result;
     try {
-      final response = await get(
-          'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&language=en-US&page=1',
+      final response = await get(nowPlayMovieUrl,
           headers: {'content-type': 'application/json;charset=utf-8'});
       result = (jsonDecode(response.body))['results'];
       return result.map((json) => Detail.fromJson(json)).toList();
@@ -88,8 +85,7 @@ class MovieAPIProvider extends Services {
   Future<List<Detail>> getUpcomingMovie() async {
     List result;
     try {
-      final response = await get(
-          'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1',
+      final response = await get(upcomingMovieUrl,
           headers: {'content-type': 'application/json;charset=utf-8'});
       result = (jsonDecode(response.body))['results'];
       return result.map((json) => Detail.fromJson(json)).toList();
