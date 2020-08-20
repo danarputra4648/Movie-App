@@ -5,18 +5,24 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:get/get.dart';
 
 class MovieController extends GetxController {
-  // static get controller => Get.put(MovieController());
-
   final _service = Get.put(MovieAPIProvider());
 
   var pageIndex = 0.obs;
 
+  List<GenreViewModel> genreViewModel = List<GenreViewModel>();
   List<DetailViewModel> detailViewModel = List<DetailViewModel>();
   List<DetailViewModel> upcomingViewModel = List<DetailViewModel>();
   List<DetailViewModel> popularViewModel = List<DetailViewModel>();
   List<DetailViewModel> recommendViewModel = List<DetailViewModel>();
+  List<DetailViewModel> topRatedViewModel = List<DetailViewModel>();
+  List<DetailViewModel> nowPlayViewModel = List<DetailViewModel>();
 
-  List<GenreViewModel> genreViewModel = List<GenreViewModel>();
+  Future<void> getTopRatedData() async {
+    List<Detail> topRated = await _service.getTopRatedMovie();
+    topRatedViewModel =
+        topRated.map((data) => DetailViewModel(detail: data)).toList();
+    update();
+  }
 
   Future<void> getUpcomingData() async {
     List<Detail> upcoming = await _service.getUpcomingMovie();
@@ -26,9 +32,9 @@ class MovieController extends GetxController {
   }
 
   Future<void> getPopularData() async {
-    List<Detail> recomended = await _service.getPopularMovie();
+    List<Detail> popular = await _service.getPopularMovie();
     popularViewModel =
-        recomended.map((data) => DetailViewModel(detail: data)).toList();
+        popular.map((data) => DetailViewModel(detail: data)).toList();
     update();
   }
 
@@ -45,10 +51,10 @@ class MovieController extends GetxController {
     update();
   }
 
-  Future<void> getRecommendedData() async {
-    List<Detail> recommeded = await _service.getRecommendMovie();
-    recommendViewModel =
-        recommeded.map((data) => DetailViewModel(detail: data)).toList();
+  Future<void> getNowPlayData() async {
+    List<Detail> nowPlay = await _service.getNowPlayMovie();
+    nowPlayViewModel =
+        nowPlay.map((data) => DetailViewModel(detail: data)).toList();
     update();
   }
 
@@ -63,7 +69,8 @@ class MovieController extends GetxController {
     getSearchData();
     getPopularData();
     getUpcomingData();
-    getRecommendedData();
+    getNowPlayData();
+    getTopRatedData();
     super.onInit();
   }
 }

@@ -10,8 +10,9 @@ abstract class Services {
   Future<List<Detail>> getSearchMovie();
   Future<List<Genre>> getGenreMovie();
   Future<List<Detail>> getPopularMovie();
-  Future<List<Detail>> getRecommendMovie();
+  Future<List<Detail>> getNowPlayMovie();
   Future<List<Detail>> getUpcomingMovie();
+  Future<List<Detail>> getTopRatedMovie();
 }
 
 class MovieAPIProvider extends Services {
@@ -36,7 +37,8 @@ class MovieAPIProvider extends Services {
     List result;
     try {
       final response = await get(
-          'https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US');
+          'https://api.themoviedb.org/3/genre/movie/list?api_key=$apiKey&language=en-US',
+          headers: {'content-type': 'application/json;charset=utf-8'});
       if (response.statusCode == 200) {
         result = (jsonDecode(response.body))['genres'];
         return result.map((json) => Genre.fromJson(json)).toList();
@@ -54,7 +56,8 @@ class MovieAPIProvider extends Services {
     List result;
     try {
       final response = await get(
-          'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1');
+          'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1',
+          headers: {'content-type': 'application/json;charset=utf-8'});
       if (response.statusCode == 200) {
         result = (jsonDecode(response.body))['results'];
         return result.map((json) => Detail.fromJson(json)).toList();
@@ -67,11 +70,12 @@ class MovieAPIProvider extends Services {
   }
 
   @override
-  Future<List<Detail>> getRecommendMovie() async {
+  Future<List<Detail>> getNowPlayMovie() async {
     List result;
     try {
       final response = await get(
-          'https://api.themoviedb.org/3/movie/550/recommendations?api_key=$apiKey&language=en-US&page=1');
+          'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&language=en-US&page=1',
+          headers: {'content-type': 'application/json;charset=utf-8'});
       result = (jsonDecode(response.body))['results'];
       return result.map((json) => Detail.fromJson(json)).toList();
     } on HttpException catch (e) {
@@ -85,7 +89,23 @@ class MovieAPIProvider extends Services {
     List result;
     try {
       final response = await get(
-          'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1');
+          'https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1',
+          headers: {'content-type': 'application/json;charset=utf-8'});
+      result = (jsonDecode(response.body))['results'];
+      return result.map((json) => Detail.fromJson(json)).toList();
+    } on HttpException catch (e) {
+      print(e.message);
+      throw e.message;
+    }
+  }
+
+  @override
+  Future<List<Detail>> getTopRatedMovie() async {
+    List result;
+    try {
+      final response = await get(
+          'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&language=en-US&page=1',
+          headers: {'content-type': 'application/json;charset=utf-8'});
       result = (jsonDecode(response.body))['results'];
       return result.map((json) => Detail.fromJson(json)).toList();
     } on HttpException catch (e) {

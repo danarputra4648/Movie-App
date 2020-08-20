@@ -1,36 +1,33 @@
 import 'dart:ui';
 
 import 'package:GrubNet/constant.dart';
+import 'package:GrubNet/core/getx/arguments_controller.dart';
 import 'package:GrubNet/core/getx/movie_controller.dart';
-import 'package:GrubNet/view/screens/detail_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Recommendation extends StatelessWidget {
+class NowPlay extends StatelessWidget {
   final movie = Get.put(MovieController());
+  final args = Get.put(ArgumentsController());
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       carouselController: CarouselController(),
-      itemCount: movie.recommendViewModel.map((e) => e.posterImg).length >= 5
+      itemCount: movie.nowPlayViewModel.map((e) => e.posterImg).length >= 5
           ? 5
-          : movie.recommendViewModel.map((e) => e.posterImg).length,
+          : movie.nowPlayViewModel.map((e) => e.posterImg).length,
       itemBuilder: (context, index) => InkWell(
         splashColor: disabledIconColor,
-        onTap: () => Get.toNamed(
-          DetailScreen.routeName,
-          arguments: {
-            'backdrop_img':
-                'https://image.tmdb.org/t/p/w300${movie.recommendViewModel[index].backdropImg}',
-            'poster_img':
-                'https://image.tmdb.org/t/p/w300${movie.recommendViewModel[index].posterImg}',
-            'overview': movie.recommendViewModel[index].description,
-            'genres': movie.recommendViewModel[index].genres,
-            'title': movie.recommendViewModel[index].title,
-          },
+        onTap: () => args.getArguments(
+          id: movie.nowPlayViewModel[index].id,
+          backdropImg: movie.nowPlayViewModel[index].backdropImg,
+          posterImg: movie.nowPlayViewModel[index].posterImg,
+          genres: movie.nowPlayViewModel[index].genres,
+          overview: movie.nowPlayViewModel[index].overview,
+          title: movie.nowPlayViewModel[index].title,
         ),
         child: CachedNetworkImage(
           errorWidget: (context, url, error) => FlutterLogo(),
@@ -38,7 +35,7 @@ class Recommendation extends StatelessWidget {
             width: 300,
           ),
           imageUrl:
-              'https://image.tmdb.org/t/p/w300${movie.recommendViewModel[index].posterImg}',
+              'https://image.tmdb.org/t/p/w300${movie.nowPlayViewModel[index].posterImg}',
           width: 300,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(

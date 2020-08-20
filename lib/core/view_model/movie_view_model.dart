@@ -12,7 +12,7 @@ class DetailViewModel {
   bool get isVideo => _search.isVideo;
   bool get isAdult => _search.isAdult;
   num get popularity => _search.popularity;
-  String get description => _search.overview;
+  String get overview => _search.overview;
   String get title => _search.title;
   String get publishDate => _search.releaseDate;
   List get genres => _search.genreIds;
