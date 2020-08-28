@@ -1,20 +1,22 @@
-import 'package:GrubNet/core/getx/arguments_controller.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+
+import '../../core/utils/number_format.dart';
+import '../../core/view_model/arguments_view_model.dart';
+import '../../core/view_model/movie_view_model.dart';
 
 class PopularCarousel extends StatelessWidget {
-  final movie = Get.put(MovieController());
-  final args = Get.put(ArgumentsController());
+  final movie = Get.put(MovieViewModel());
+  final args = Get.put(ArgumentesViewModel());
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       itemCount:
-          movie.popularViewModel.map((movies) => movies.posterImg).length,
+          movie.popularViewModel.map((movies) => movies.posterPath).length,
       itemBuilder: (context, index) => InkWell(
         borderRadius: BorderRadius.circular(5),
         splashColor: Colors.grey[700],
@@ -47,8 +49,7 @@ class PopularCarousel extends StatelessWidget {
               color: Colors.yellow,
             ),
             label: Text(
-              NumberFormat.compact()
-                  .format(movie.popularViewModel[index].voteCount),
+              numberConvert(movie.popularViewModel[index].voteCount),
               style: TextStyle(color: Colors.grey),
             ),
           ),
@@ -92,7 +93,7 @@ class PopularCarousel extends StatelessWidget {
               color: Colors.yellow,
             ),
             label: Text(
-              movie.popularViewModel[index].voteAvg.toStringAsPrecision(2),
+              movie.popularViewModel[index].voteAverage.toStringAsPrecision(2),
               style: TextStyle(
                 color: Colors.yellow,
                 fontSize: 16,
@@ -108,7 +109,7 @@ class PopularCarousel extends StatelessWidget {
         height: 150,
       ),
       imageUrl:
-          'https://image.tmdb.org/t/p/w300${movie.popularViewModel[index].posterImg}',
+          'https://image.tmdb.org/t/p/w300${movie.popularViewModel[index].posterPath}',
     );
   }
 }

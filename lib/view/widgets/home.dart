@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import '../../constant.dart';
+import '../../core/view_model/movie_view_model.dart';
 import '../widgets/category.dart' as widget;
-import 'now_play.dart' as widget;
 import '../widgets/dot_indicator.dart' as widget;
-import '../widgets/upcoming.dart' as widget;
 import '../widgets/popular_carousel.dart' as widget;
+import '../widgets/upcoming.dart' as widget;
+import 'now_play.dart' as widget;
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MovieController>(
-      init: MovieController(),
+    return GetBuilder<MovieViewModel>(
+      init: MovieViewModel(),
       builder: (movie) => SafeArea(
         child: SingleChildScrollView(
           child: Column(

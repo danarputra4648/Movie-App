@@ -1,10 +1,12 @@
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../core/view_model/movie_view_model.dart';
+
 class DotIndicator extends StatelessWidget {
-  final movieIndicator = Get.put(MovieController());
+  final movieIndicator = Get.put(MovieViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,4 +1,5 @@
 import 'package:GrubNet/constant.dart';
+import 'package:GrubNet/view/routes/routes_name.dart';
 import 'package:GrubNet/view/screens/detail_screen.dart';
 import 'package:GrubNet/view/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,8 @@ class MyApp extends StatelessWidget {
       // home: HomeScreens(),
       initialRoute: '/',
       getPages: [
-        GetPage(name: HomeScreens.routeName, page: () => HomeScreens()),
-        GetPage(name: DetailScreen.routeName, page: () => DetailScreen()),
+        GetPage(name: homeScreen, page: () => HomeScreens()),
+        GetPage(name: detailScreen, page: () => DetailScreen()),
       ],
     );
   }

@@ -1,10 +1,11 @@
-import 'package:GrubNet/view/screens/find_screen.dart';
-import 'package:GrubNet/view/screens/profile_screen.dart';
-import 'package:GrubNet/view/screens/top_rated_screen.dart';
-import 'package:GrubNet/view/widgets/home.dart';
 import 'package:get/get.dart';
 
-class NavBarController extends GetxController {
+import '../../view/screens/find_screen.dart';
+import '../../view/screens/profile_screen.dart';
+import '../../view/screens/top_rated_screen.dart';
+import '../../view/widgets/home.dart';
+
+class NavBarViewModel extends GetxController {
   var listTitleWidget = [
     'Movie',
     'Ranking',

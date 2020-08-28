@@ -1,12 +1,13 @@
-import 'package:GrubNet/core/getx/nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+
+import '../../core/view_model/nav_bar_view_model.dart';
 
 class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NavBarController>(
-      init: NavBarController(),
+    return GetBuilder<NavBarViewModel>(
+      init: NavBarViewModel(),
       builder: (navigation) => BottomNavigationBar(
         currentIndex: navigation.selectedIndex.value,
         onTap: navigation.onSelectedIndex,

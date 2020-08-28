@@ -1,16 +1,17 @@
 import 'dart:ui';
 
-import 'package:GrubNet/constant.dart';
-import 'package:GrubNet/core/getx/arguments_controller.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant.dart';
+import '../../core/view_model/arguments_view_model.dart';
+import '../../core/view_model/movie_view_model.dart';
+
 class NowPlay extends StatelessWidget {
-  final movie = Get.put(MovieController());
-  final args = Get.put(ArgumentsController());
+  final movie = Get.put(MovieViewModel());
+  final args = Get.put(ArgumentesViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class NowPlay extends StatelessWidget {
             width: 300,
           ),
           imageUrl:
-              'https://image.tmdb.org/t/p/w300${movie.nowPlayViewModel[index].posterImg}',
+              'https://image.tmdb.org/t/p/w300${movie.nowPlayViewModel[index].posterPath}',
           width: 300,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(

@@ -1,13 +1,14 @@
-import 'package:GrubNet/core/getx/arguments_controller.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/view_model/arguments_view_model.dart';
+import '../../core/view_model/movie_view_model.dart';
+
 class Upcoming extends StatelessWidget {
-  final movie = Get.put(MovieController());
-  final args = Get.put(ArgumentsController());
+  final movie = Get.put(MovieViewModel());
+  final args = Get.put(ArgumentesViewModel());
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
@@ -27,7 +28,7 @@ class Upcoming extends StatelessWidget {
           ),
         ),
         imageUrl:
-            'https://image.tmdb.org/t/p/w185${movie.upcomingViewModel[index].posterImg}',
+            'https://image.tmdb.org/t/p/w185${movie.upcomingViewModel[index].posterPath}',
       ),
       options: CarouselOptions(
         viewportFraction: 0.5,

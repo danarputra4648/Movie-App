@@ -1,9 +1,10 @@
-import 'package:GrubNet/core/getx/movie_controller.dart';
-import 'package:GrubNet/view/screens/detail_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class ArgumentsController {
+import '../../view/routes/routes_name.dart';
+import 'movie_view_model.dart';
+
+class ArgumentesViewModel {
   void getArguments({
     @required int id,
     @required String title,
@@ -15,7 +16,7 @@ class ArgumentsController {
     @required double voteAvg,
   }) {
     Get.toNamed(
-      DetailScreen.routeName,
+      detailScreen,
       arguments: {
         'backdrop_img': 'https://image.tmdb.org/t/p/w300$backdropImg',
         'poster_img': 'https://image.tmdb.org/t/p/w300$posterImg',
@@ -29,7 +30,7 @@ class ArgumentsController {
     );
   }
 
-  final movie = Get.put(MovieController());
+  final movie = Get.put(MovieViewModel());
 
   void nowPlayArgs(int index) {
     movie.movieId.value = movie.nowPlayViewModel[index].id;
@@ -39,13 +40,13 @@ class ArgumentsController {
 
     getArguments(
       id: movie.nowPlayViewModel[index].id,
-      backdropImg: movie.nowPlayViewModel[index].backdropImg,
-      posterImg: movie.nowPlayViewModel[index].posterImg,
-      genres: movie.nowPlayViewModel[index].genres,
+      backdropImg: movie.nowPlayViewModel[index].backdropPath,
+      posterImg: movie.nowPlayViewModel[index].posterPath,
+      genres: movie.nowPlayViewModel[index].genreIds,
       overview: movie.nowPlayViewModel[index].overview,
       title: movie.nowPlayViewModel[index].title,
-      date: movie.nowPlayViewModel[index].publishDate,
-      voteAvg: movie.nowPlayViewModel[index].voteAvg,
+      date: movie.nowPlayViewModel[index].releaseDate,
+      voteAvg: movie.nowPlayViewModel[index].voteAverage,
     );
   }
 
@@ -57,13 +58,13 @@ class ArgumentsController {
 
     getArguments(
       id: movie.upcomingViewModel[index].id,
-      backdropImg: movie.upcomingViewModel[index].backdropImg,
-      posterImg: movie.upcomingViewModel[index].posterImg,
-      genres: movie.upcomingViewModel[index].genres,
+      backdropImg: movie.upcomingViewModel[index].backdropPath,
+      posterImg: movie.upcomingViewModel[index].posterPath,
+      genres: movie.upcomingViewModel[index].genreIds,
       overview: movie.upcomingViewModel[index].overview,
       title: movie.upcomingViewModel[index].title,
-      date: movie.upcomingViewModel[index].publishDate,
-      voteAvg: movie.upcomingViewModel[index].voteAvg,
+      date: movie.upcomingViewModel[index].releaseDate,
+      voteAvg: movie.upcomingViewModel[index].voteAverage,
     );
   }
 
@@ -75,13 +76,13 @@ class ArgumentsController {
 
     getArguments(
       id: movie.popularViewModel[index].id,
-      backdropImg: movie.popularViewModel[index].backdropImg,
-      posterImg: movie.popularViewModel[index].posterImg,
-      genres: movie.popularViewModel[index].genres,
+      backdropImg: movie.popularViewModel[index].backdropPath,
+      posterImg: movie.popularViewModel[index].posterPath,
+      genres: movie.popularViewModel[index].genreIds,
       overview: movie.popularViewModel[index].overview,
       title: movie.popularViewModel[index].title,
-      date: movie.popularViewModel[index].publishDate,
-      voteAvg: movie.popularViewModel[index].voteAvg,
+      date: movie.popularViewModel[index].releaseDate,
+      voteAvg: movie.popularViewModel[index].voteAverage,
     );
   }
 
@@ -93,13 +94,13 @@ class ArgumentsController {
 
     getArguments(
       id: movie.topRatedViewModel[index].id,
-      backdropImg: movie.topRatedViewModel[index].backdropImg,
-      posterImg: movie.topRatedViewModel[index].posterImg,
-      genres: movie.topRatedViewModel[index].genres,
+      backdropImg: movie.topRatedViewModel[index].backdropPath,
+      posterImg: movie.topRatedViewModel[index].posterPath,
+      genres: movie.topRatedViewModel[index].genreIds,
       overview: movie.topRatedViewModel[index].overview,
       title: movie.topRatedViewModel[index].title,
-      date: movie.topRatedViewModel[index].publishDate,
-      voteAvg: movie.topRatedViewModel[index].voteAvg,
+      date: movie.topRatedViewModel[index].releaseDate,
+      voteAvg: movie.topRatedViewModel[index].voteAverage,
     );
   }
 }

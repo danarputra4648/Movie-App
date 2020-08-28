@@ -1,24 +1,16 @@
-import 'package:GrubNet/constant.dart';
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DetailScreen extends StatelessWidget {
-  static const routeName = '/detail-screen';
+import '../../constant.dart';
+import '../../core/view_model/movie_view_model.dart';
 
+class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final movie = Get.put(MovieController());
+    final movie = Get.put(MovieViewModel());
     final routeArgs = Get.arguments as Map<String, Object>;
-    final backdropImg = routeArgs['backdrop_img'];
-    final posterImg = routeArgs['poster_img'];
-    final overview = routeArgs['overview'];
-    final genres = routeArgs['genres'] as List;
-    final title = routeArgs['title'] as String;
-    final date = routeArgs['date'];
-    final vote = routeArgs['vote_avg'];
 
     return Scaffold(
       body: SafeArea(
@@ -26,10 +18,11 @@ class DetailScreen extends StatelessWidget {
         top: false,
         child: CustomScrollView(
           slivers: [
-            buildPosterImage(posterImg, backdropImg),
-            buildPosterTitle(title, vote),
-            buildPosterDescription(overview, date),
-            buildPosterGenres(movie, genres),
+            buildPosterImage(
+                routeArgs['poster_img'], routeArgs['backdrop_img']),
+            buildPosterTitle(routeArgs['title'], routeArgs['vote_avg']),
+            buildPosterDescription(routeArgs['overview'], routeArgs['date']),
+            buildPosterGenres(movie, routeArgs['genres']),
             buildSimiliarPoster(),
           ],
         ),
@@ -37,9 +30,9 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  GetBuilder<MovieController> buildSimiliarPoster() {
-    return GetBuilder<MovieController>(
-      init: MovieController(),
+  GetBuilder<MovieViewModel> buildSimiliarPoster() {
+    return GetBuilder<MovieViewModel>(
+      init: MovieViewModel(),
       builder: (similiar) => SliverToBoxAdapter(
         child: similiar.similiarViewModel.isNotEmpty
             ? Column(
@@ -71,7 +64,7 @@ class DetailScreen extends StatelessWidget {
                         errorWidget: (context, url, error) => FlutterLogo(),
                         placeholder: (context, url) => Container(),
                         imageUrl:
-                            'https://image.tmdb.org/t/p/w300${similiar.similiarViewModel[index].posterImg}',
+                            'https://image.tmdb.org/t/p/w300${similiar.similiarViewModel[index].posterPath}',
                         imageBuilder: (context, imageProvider) => Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: 150,
@@ -104,7 +97,7 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter buildPosterGenres(MovieController genre, List genres) {
+  SliverToBoxAdapter buildPosterGenres(MovieViewModel genre, List genres) {
     return SliverToBoxAdapter(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

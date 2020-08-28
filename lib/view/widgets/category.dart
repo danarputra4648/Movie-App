@@ -1,11 +1,11 @@
-import 'package:GrubNet/core/getx/movie_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constant.dart';
+import '../../core/view_model/movie_view_model.dart';
 
 class Category extends StatelessWidget {
-  final genre = Get.put(MovieController());
+  final genre = Get.put(MovieViewModel());
   @override
   Widget build(BuildContext context) {
     return Padding(
