@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class Detail extends Equatable {
   final int id;
@@ -16,19 +15,36 @@ class Detail extends Equatable {
   final num voteAverage;
 
   Detail({
-    @required this.id,
-    @required this.posterPath,
-    @required this.isAdult,
-    @required this.overview,
-    @required this.releaseDate,
-    @required this.genreIds,
-    @required this.title,
-    @required this.backdropPath,
-    @required this.popularity,
-    @required this.voteCount,
-    @required this.isVideo,
-    @required this.voteAverage,
+    this.id,
+    this.posterPath,
+    this.isAdult,
+    this.overview,
+    this.releaseDate,
+    this.genreIds,
+    this.title,
+    this.backdropPath,
+    this.popularity,
+    this.voteCount,
+    this.isVideo,
+    this.voteAverage,
   });
+
+  factory Detail.fromJson(Map<String, dynamic> json) {
+    return Detail(
+      id: json['id'],
+      backdropPath: json['backdrop_path'],
+      genreIds: json['genre_ids'],
+      isAdult: json['adult'],
+      overview: json['overview'],
+      releaseDate: json['release_date'],
+      title: json['title'],
+      popularity: json['popularity'],
+      voteCount: json['vote_count'],
+      isVideo: json['video'],
+      voteAverage: json['vote_average'],
+      posterPath: json['poster_path'],
+    );
+  }
 
   @override
   List<Object> get props => [
@@ -51,10 +67,14 @@ class Genre extends Equatable {
   final int id;
   final String name;
 
-  Genre({
-    @required this.id,
-    @required this.name,
-  });
+  Genre({this.id, this.name});
+
+  factory Genre.fromJson(Map<String, dynamic> json) {
+    return Genre(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
 
   @override
   List<Object> get props => [id, name];

@@ -1,18 +1,20 @@
-import 'package:GrubNet/constant.dart';
-import 'package:GrubNet/core/getx/args_injection.dart';
-import 'package:GrubNet/core/getx/movie_injection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../constant.dart';
+import '../../core/view_model/arguments_view_model.dart';
+import '../../core/view_model/movie_view_model.dart';
+
 class TopRatedScreen extends StatelessWidget {
-  final args = Get.put(ArgumentsInjection());
+  final args = Get.put(ArgumentesViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<MovieInjection>(
-        init: MovieInjection(),
+      body: GetBuilder<MovieViewModel>(
+        init: MovieViewModel(),
         builder: (movie) => ListView.builder(
           itemBuilder: (context, index) => InkWell(
             splashColor: Colors.grey[700],
@@ -30,7 +32,7 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Container buildPosterBackground(MovieInjection movie, int index) {
+  Container buildPosterBackground(MovieViewModel movie, int index) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(10),
@@ -47,7 +49,7 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Expanded buildMovieInfo(MovieInjection movie, int index) {
+  Expanded buildMovieInfo(MovieViewModel movie, int index) {
     return Expanded(
       flex: 4,
       child: Column(
@@ -89,14 +91,14 @@ class TopRatedScreen extends StatelessWidget {
     );
   }
 
-  Positioned buildPosterImage(MovieInjection movie, int index) {
+  Positioned buildPosterImage(MovieViewModel movie, int index) {
     return Positioned(
       top: 0,
       left: 40,
       bottom: 40,
       child: CachedNetworkImage(
         imageUrl:
-            'https://image.tmdb.org/t/p/w185${movie.topRatedViewModel[index].posterImg}',
+            'https://image.tmdb.org/t/p/w185${movie.topRatedViewModel[index].posterPath}',
         imageBuilder: (context, imageProvider) => Container(
           clipBehavior: Clip.antiAlias,
           width: 120,

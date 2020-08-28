@@ -1,4 +1,4 @@
-import 'package:GrubNet/core/getx/nav_bar_injection.dart';
+import 'package:GrubNet/core/view_model/nav_bar_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:GrubNet/view/widgets/nav_bar.dart';
@@ -6,8 +6,6 @@ import 'package:GrubNet/constant.dart';
 import 'package:get/state_manager.dart';
 
 class HomeScreens extends StatelessWidget {
-  static const routeName = '/';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +14,8 @@ class HomeScreens extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GetBuilder<NavBarInjection>(
-              init: NavBarInjection(),
+            GetBuilder<NavBarViewModel>(
+              init: NavBarViewModel(),
               builder: (appbarName) => Text(
                 appbarName.listTitleWidget
                     .elementAt(appbarName.selectedIndex.value),
@@ -45,8 +43,8 @@ class HomeScreens extends StatelessWidget {
           ],
         ),
       ),
-      body: GetBuilder<NavBarInjection>(
-        init: NavBarInjection(),
+      body: GetBuilder<NavBarViewModel>(
+        init: NavBarViewModel(),
         builder: (navigator) =>
             navigator.listWidget.elementAt(navigator.selectedIndex.value),
       ),
