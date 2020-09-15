@@ -11,9 +11,6 @@ Link    : [His Dribble](https://dribbble.com/shots/4828362-Movie-app) <br>
 
 ## Screenshot
 <p align="left">
-<img src=".Screenshot/home.png" alt="home screen" width="240" height=480/>
-<img src=".Screenshot/ranking.png" alt="rank screen" width="240" height=480/>
-<img src=".Screenshot/top_rated.png" alt="top_rated screen" width="240" height=480/>
-<img src=".Screenshot/profile.png" alt="profile screen" width="240" height=480/>
-<img src=".Screenshot/detail.png" alt="detail screen" width="240" height=480/> 
-/p>
+<img src=".Screenshot/movie_app_design.png" alt="home screen" width="100%" height="100%"/>
+
+</p>
