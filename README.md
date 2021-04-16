@@ -1,7 +1,7 @@
 # Overview
-This is my good project than other my project <br>
+
 I hope you enjoy it :) <br>
-API is from TheMovieDB :smile:
+Learning how to implement UI from Dribble and API is from TheMovieDB :smile:
 <br>
 Source for Design Inspiration is From Dribble <br>
 Link    : [His Dribble](https://dribbble.com/shots/4828362-Movie-app) <br>
